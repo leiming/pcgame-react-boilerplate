@@ -1,0 +1,52 @@
+@import "../func";
+
+@dropdown: ~"dropdown";
+
+.@{dropdown} {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+
+  .fa-caret {
+    width: 12px;
+    padding-left: 5px;
+  }
+
+  .fa-caret:before {
+    content: "\f0d8";
+  }
+
+  &-toggle {
+    text-align: center;
+    .user-select();
+  }
+
+  &-toggle {
+    text-align: center;
+    .user-select();
+  }
+
+  &-content {
+    position: absolute;
+    display: block;
+
+    &.align-right {
+      .align-right();
+    }
+
+  }
+
+  &&-hidden {
+
+    .@{dropdown}-content {
+      display: none !important;
+    }
+
+    .fa-caret:before {
+      content: "\f0d7";
+    }
+
+  }
+}
+
+

@@ -1,39 +1,82 @@
 import React, { Component } from 'react';
-import { NICE, SUPER_NICE } from './colors';
+import Dropdown from './components/Dropdown.jsx';
+import $ from 'jquery';
+import {addMaskLayer, removeMaskLayer} from './business/MaskUtil';
 
-class Counter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
+require('./App.less');
 
-  tick() {
-    this.setState({
-      counter: this.state.counter + this.props.increment
-    });
-  }
+let maskCounter = 0;
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
+export default class App extends Component {
+
+  handler = (otherParams, obj) => {
+
+    const targetLayer = '#iframe'
+
+    console.log(obj);
+    console.log(otherParams);
+
+    let visible = obj && obj.visible
+    if (visible) {
+      addMaskLayer(targetLayer, '#root', maskCounter++)
+    } else {
+      removeMaskLayer(targetLayer)
+    }
   }
 
   render() {
+    const spaceStyle = {width: 50, display: "inline-block"}
+
     return (
-      <h1 style={{ color: this.props.color }}>
-        Counter ({this.props.increment}): {this.state.counter}
-      </h1>
+      <div>
+        <Dropdown onVisibleChange={this.handler}>
+          <span>label</span>
+
+          <div>
+            <ul>
+              <li>word</li>
+              <li>excel</li>
+              <li>ppt</li>
+            </ul>
+          </div>
+        </Dropdown>
+
+        <div style={spaceStyle}></div>
+
+        <Dropdown onVisibleChange={this.handler.bind(this, {"bar": 213})}
+                  activeMethod={"click"} defaultVisible={true}>
+          <span>label2</span>
+          <DropdownChild/>
+        </Dropdown>
+      </div>
     );
   }
 }
 
-export class App extends Component {
+
+class DropdownChild extends Component {
+
+  state = {count : 0}
+
+  onClick = (e) => {
+    console.log(this.state.count);
+    this.setState({count: ++this.state.count})
+  }
+
   render() {
-    return (
-      <div>
-        <Counter increment={1} color={NICE} />
-        <Counter increment={5} color={SUPER_NICE} />
+
+    const divStyle = {
+      background: '#ccffcc'
+    }
+
+    return (<div className={"ccc"} style={divStyle}>
+        <button onClick={this.onClick}>button</button>
+        <ul>
+          <li>word2</li>
+          <li>excel2</li>
+          <li>ppt2</li>
+        </ul>
       </div>
-    );
+    )
   }
 }
