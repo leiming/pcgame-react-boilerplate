@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import invariant from 'invariant'
 
-require('./dropdown.less')
-
 export default class Dropdown extends React.Component {
 
   static defaultProps = {
