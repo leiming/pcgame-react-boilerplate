@@ -9,12 +9,11 @@ let maskCounter = 0;
 
 export default class App extends Component {
 
-  handler = (otherParams, obj) => {
+  handler = (obj) => {
 
     const targetLayer = '#iframe'
 
     console.log(obj);
-    console.log(otherParams);
 
     let visible = obj && obj.visible
     if (visible) {
@@ -26,6 +25,10 @@ export default class App extends Component {
 
   render() {
     const spaceStyle = {width: 50, display: "inline-block"}
+
+    const contentStyle = {
+      right: 0
+    }
 
     return (
       <div>
@@ -43,8 +46,11 @@ export default class App extends Component {
 
         <div style={spaceStyle}></div>
 
-        <Dropdown onVisibleChange={this.handler.bind(this, {"bar": 213})}
-                  activeMethod={"click"} defaultVisible={true}>
+        <Dropdown onVisibleChange={this.handler}
+                  contentStyle={contentStyle}
+                  activeMethod={"click"}
+                  className={'custom'}
+                  defaultVisible={true}>
           <span>label2</span>
           <DropdownChild/>
         </Dropdown>
@@ -53,10 +59,9 @@ export default class App extends Component {
   }
 }
 
-
 class DropdownChild extends Component {
 
-  state = {count : 0}
+  state = {count: 0}
 
   onClick = (e) => {
     console.log(this.state.count);
@@ -72,7 +77,7 @@ class DropdownChild extends Component {
     return (<div className={"ccc"} style={divStyle}>
         <button onClick={this.onClick}>button</button>
         <ul>
-          <li>word2</li>
+          <li>wordddddddddddddddddddddddddddddddddd2</li>
           <li>excel2</li>
           <li>ppt2</li>
         </ul>
