@@ -11,7 +11,7 @@
     "test": "NODE_ENV=production BABEL_JEST_STAGE=0 jest"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "scriptPreprocessor": "<rootDir>/jest-script-preprocessor",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom",
