@@ -30,10 +30,19 @@
     position: absolute;
     display: block;
 
-    &.align-right {
-      .align-right();
-    }
+  }
 
+  &-close {
+    position: absolute;
+    display: block;
+    width: 15px;
+    height: 15px;
+    right: 0;
+    &:extend(.fa);
+  }
+
+  &-close:before {
+    content: "\f00d";
   }
 
   &&-hidden {
