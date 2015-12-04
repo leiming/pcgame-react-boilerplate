@@ -47,7 +47,6 @@ export default class App extends Component {
         <div style={spaceStyle}></div>
 
         <Dropdown onVisibleChange={this.handler}
-                  contentStyle={contentStyle}
                   activeMethod={"click"}
                   className={'custom'}
                   defaultVisible={true}>
@@ -75,6 +74,7 @@ class DropdownChild extends Component {
     }
 
     return (<div className={"ccc"} style={divStyle}>
+        <span className="dropdown-close"/>
         <button onClick={this.onClick}>button</button>
         <ul>
           <li>wordddddddddddddddddddddddddddddddddd2</li>
