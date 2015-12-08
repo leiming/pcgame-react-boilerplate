@@ -13,7 +13,7 @@ describe('Dropdown', () => {
   let Dropdown;
 
   beforeEach(()=>{
-    Dropdown = require('../Dropdown')
+    Dropdown = require('../Dropdown/Dropdown')
   })
 
   it('should exists', () => {

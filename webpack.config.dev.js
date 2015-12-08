@@ -3,14 +3,19 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    'eventsource-polyfill',
-    'webpack-hot-middleware/client',
-    './src/index'
-  ],
+  entry: {
+    index: [
+      'webpack-hot-middleware/client',
+      './src/index'
+    ],
+    dropdown: [
+      'webpack-hot-middleware/client',
+      './examples/Dropdown/index'
+    ]
+  },
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.join(__dirname, 'build'),
+    filename: '[name].js',
     publicPath: '/static/'
   },
   plugins: [
@@ -22,13 +27,16 @@ module.exports = {
     //  on the global var jQuery
     "jquery": "jQuery"
   },
+  resolve: {
+    extensions : ["", ".webpack.js", ".web.js", ".js", ".jsx"]
+  },
   module: {
     loaders: [
       // JavaScript
       {
         test: /\.(js|jsx)$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'src')
+        include: [path.join(__dirname, 'src'), path.join(__dirname, 'examples')]
       },
       // LESS
       {

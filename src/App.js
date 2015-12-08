@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dropdown from './components/Dropdown.jsx';
+import Dropdown from './components/Dropdown/Dropdown.jsx';
 import $ from 'jquery';
 import {addMaskLayer, removeMaskLayer} from './business/MaskUtil';
 
@@ -25,10 +25,6 @@ export default class App extends Component {
 
   render() {
     const spaceStyle = {width: 50, display: "inline-block"}
-
-    const contentStyle = {
-      right: 0
-    }
 
     return (
       <div>
@@ -77,7 +73,7 @@ class DropdownChild extends Component {
         <span className="dropdown-close"/>
         <button onClick={this.onClick}>button</button>
         <ul>
-          <li>wordddddddddddddddddddddddddddddddddd2</li>
+          <li>word2</li>
           <li>excel2</li>
           <li>ppt2</li>
         </ul>

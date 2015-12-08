@@ -3,12 +3,19 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-map',
-  entry: [
-    './src/index'
-  ],
+  entry: {
+    index: [
+      'webpack-hot-middleware/client',
+      './src/index'
+    ],
+    dropdown: [
+      'webpack-hot-middleware/client',
+      './examples/Dropdown/index'
+    ]
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: '/static/'
   },
   plugins: [
@@ -24,11 +31,30 @@ module.exports = {
       }
     })
   ],
+  externals: {
+    // require("jquery") is external and available
+    //  on the global var jQuery
+    "jquery": "jQuery"
+  },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }]
+    loaders: [
+      // JavaScript
+      {
+        test: /\.(js|jsx)$/,
+        loaders: ['babel'],
+        include: path.join(__dirname, 'src')
+      },
+      // LESS
+      {
+        test: /\.less$/,
+        loader: "style!css!less"
+      },
+
+      // CSS
+      {
+        test: /\.css$/,
+        loader: "style!css"
+      }
+    ]
   }
 };
