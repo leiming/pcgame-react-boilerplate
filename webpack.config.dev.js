@@ -4,6 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'eval',
   entry: [
+    'eventsource-polyfill',
     'webpack-hot-middleware/client',
     './src/index'
   ],

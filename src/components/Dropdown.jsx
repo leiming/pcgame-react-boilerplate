@@ -90,7 +90,9 @@ export default class Dropdown extends React.Component {
   onDocumentClick = (e) => {
     // 此处留有个关闭按钮的 hook:
     // 当点击的节点 class 中存在 "dropdown-close" 时, 关闭按钮
-    if (e.target.classList.contains("dropdown-close")) {
+    const targetClass = e.target.getAttribute('class')
+
+    if (targetClass && targetClass.indexOf("dropdown-close") !== -1) {
       this.setVisible(false)
       return
     }
