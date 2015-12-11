@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   devtool: 'source-map',
@@ -7,10 +8,6 @@ module.exports = {
     index: [
       'webpack-hot-middleware/client',
       './src/index'
-    ],
-    dropdown: [
-      'webpack-hot-middleware/client',
-      './examples/Dropdown/index'
     ]
   },
   output: {
@@ -19,6 +16,7 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new ExtractTextPlugin("[name].css"),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -50,13 +48,12 @@ module.exports = {
       // LESS
       {
         test: /\.less$/,
-        loader: "style!css!less"
+        loader: ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 versions", "ie 8", "ie 9", "> 1%"]}!less-loader')
       },
-
       // CSS
       {
         test: /\.css$/,
-        loader: "style!css"
+        loader: ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 versions", "ie 8", "ie 9", "> 1%"]}')
       }
     ]
   }

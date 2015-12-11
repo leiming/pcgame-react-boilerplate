@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Dropdown from "../../src/components/Dropdown/Dropdown";
 
-require('../../src/components/Dropdown/dropdown.less')
+require('./dropdown_example.less')
 
 export default class Sample extends React.Component {
 

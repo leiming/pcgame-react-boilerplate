@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import invariant from 'invariant'
 
-require('./dropdown.less')
+require('./../../../styles/less/dropdown.less')
 
 export default class Dropdown extends React.Component {
 
