@@ -41,16 +41,15 @@ module.exports = {
       // LESS
       {
         test: /\.less$/,
-        loader: "style!css!less"
+        loader: 'style!css!autoprefixer-loader?{browsers:["last 2 versions", "ie 8", "ie 9", "> 1%"]}!less'
       },
 
       // CSS
       {
         test: /\.css$/,
-        loader: "style!css"
+        loader: 'style!css!autoprefixer-loader?{browsers:["last 2 versions", "ie 8", "ie 9", "> 1%"]}'
       }
     ]
-
 
   }
 };

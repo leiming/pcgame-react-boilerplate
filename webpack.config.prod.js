@@ -36,13 +36,16 @@ module.exports = {
     //  on the global var jQuery
     "jquery": "jQuery"
   },
+  resolve: {
+    extensions : ["", ".webpack.js", ".web.js", ".js", ".jsx"]
+  },
   module: {
     loaders: [
       // JavaScript
       {
         test: /\.(js|jsx)$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'src')
+        include: [path.join(__dirname, 'src'), path.join(__dirname, 'examples')]
       },
       // LESS
       {
