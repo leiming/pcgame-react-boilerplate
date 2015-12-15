@@ -11,6 +11,10 @@ module.exports = {
     dropdown: [
       'webpack-hot-middleware/client',
       './examples/Dropdown/index'
+    ],
+    button: [
+      'webpack-hot-middleware/client',
+      './examples/Button/index'
     ]
   },
   output: {

@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import invariant from 'invariant'
 
-require('./../../../styles/less/dropdown.less')
+require('./../../../styles/less/components/dropdown.less')
 
 export default class Dropdown extends React.Component {
 
   static defaultProps = {
     componentClassName: 'dropdown',
+    prefix            : '',
     activeMethod      : 'click',
     defaultVisible    : false,
     contentStyle      : {},
@@ -18,6 +19,7 @@ export default class Dropdown extends React.Component {
 
   static propTypes = {
     componentClassName: React.PropTypes.string,
+    prefix            : React.PropTypes.string,
     activeMethod      : React.PropTypes.oneOf(['click', 'hover']),
     defaultVisible    : React.PropTypes.bool,
     contentStyle      : React.PropTypes.object,

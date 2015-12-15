@@ -3,21 +3,17 @@ import ReactDOM from 'react-dom';
 
 import Dropdown from "../../src/components/Dropdown/Dropdown";
 
-require('./dropdown_example.less')
+require('./index.less')
 
 export default class Sample extends React.Component {
 
-  onVisibleChange = () => {
-
-  }
-
   render() {
     return (
-      <Dropdown activeMethod='click' defaultVisible={true}>
+      <Dropdown activeMethod='click' defaultVisible={true} prefix="ar-">
         <span className={'customToggle'} onVisibleChange={this.onVisibleChange}>
           <span>toggle</span>
         </span>
-        <div className={'customContent'}>
+        <div className={'customContent'} >
           <span className="dropdown-close"></span>
           <ul>
             <li>aaa</li>

@@ -1,0 +1,80 @@
+// -- Variables
+
+@prefix: ~'ar-';
+@ar-icon: ~'@{prefix}icon';
+@icon-small-font-size: 150%;
+@icon-medium-font-size: 200%;
+@icon-large-font-size: 250%;
+
+@icon-small-vertical-align: -10%;
+@icon-medium-vertical-align: -16%;
+@icon-large-vertical-align: -22%;
+
+//@icon-color-active:
+
+// -- Component
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// -- Reference
+//    - https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
+//    - http://www.w3.org/TR/html5/dom.html#classes
+
+[class*='@{ar-icon}'] {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// -- Size
+
+.@{ar-icon} {
+
+  &, &:hover, &:focus {
+    text-decoration: none;
+  }
+
+  &-small {
+    font-size: @icon-small-font-size;
+    vertical-align: @icon-small-vertical-align;
+  }
+
+  &-medium {
+    font-size: @icon-medium-font-size;
+    vertical-align: @icon-medium-vertical-align;
+  }
+
+  &-large {
+    font-size: @icon-large-font-size;
+    vertical-align: @icon-large-vertical-align;
+  }
+
+  &-caret-down:before {
+    content: "\f0d7";
+  }
+  &-caret-up:before {
+    content: "\f0d8";
+  }
+  &-caret-left:before {
+    content: "\f0d9";
+  }
+  &-caret-right:before {
+    content: "\f0da";
+  }
+  &-times:before {
+    content: "\f00d";
+  }
+  &-times-circle:before {
+    content: "\f057";
+  }
+}
+
