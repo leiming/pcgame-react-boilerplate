@@ -3,13 +3,23 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    'webpack-hot-middleware/client',
-    './src/index'
-  ],
+  entry: {
+    index: [
+      'webpack-hot-middleware/client',
+      './src/index'
+    ],
+    dropdown: [
+      'webpack-hot-middleware/client',
+      './examples/Dropdown/index'
+    ],
+    button: [
+      'webpack-hot-middleware/client',
+      './examples/Button/index'
+    ]
+  },
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.join(__dirname, 'build'),
+    filename: '[name].js',
     publicPath: '/static/'
   },
   plugins: [
@@ -21,27 +31,29 @@ module.exports = {
     //  on the global var jQuery
     "jquery": "jQuery"
   },
+  resolve: {
+    extensions : ["", ".webpack.js", ".web.js", ".js", ".jsx"]
+  },
   module: {
     loaders: [
       // JavaScript
       {
         test: /\.(js|jsx)$/,
         loaders: ['babel'],
-        include: path.join(__dirname, 'src')
+        include: [path.join(__dirname, 'src'), path.join(__dirname, 'examples')]
       },
       // LESS
       {
         test: /\.less$/,
-        loader: "style!css!less"
+        loader: 'style!css!autoprefixer-loader?{browsers:["last 2 versions", "ie 8", "ie 9", "> 1%"]}!less'
       },
 
       // CSS
       {
         test: /\.css$/,
-        loader: "style!css"
+        loader: 'style!css!autoprefixer-loader?{browsers:["last 2 versions", "ie 8", "ie 9", "> 1%"]}'
       }
     ]
-
 
   }
 };

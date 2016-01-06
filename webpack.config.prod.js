@@ -1,17 +1,22 @@
 var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   devtool: 'source-map',
-  entry: [
-    './src/index'
-  ],
+  entry: {
+    index: [
+      'webpack-hot-middleware/client',
+      './src/index'
+    ]
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: '/static/'
   },
   plugins: [
+    new ExtractTextPlugin("[name].css"),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -24,11 +29,32 @@ module.exports = {
       }
     })
   ],
+  externals: {
+    // require("jquery") is external and available
+    //  on the global var jQuery
+    "jquery": "jQuery"
+  },
+  resolve: {
+    extensions : ["", ".webpack.js", ".web.js", ".js", ".jsx"]
+  },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }]
+    loaders: [
+      // JavaScript
+      {
+        test: /\.(js|jsx)$/,
+        loaders: ['babel'],
+        include: [path.join(__dirname, 'src'), path.join(__dirname, 'examples')]
+      },
+      // LESS
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 versions", "ie 8", "ie 9", "> 1%"]}!less-loader')
+      },
+      // CSS
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 versions", "ie 8", "ie 9", "> 1%"]}')
+      }
+    ]
   }
 };

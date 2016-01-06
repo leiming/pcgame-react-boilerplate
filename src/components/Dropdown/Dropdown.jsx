@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import invariant from 'invariant'
 
-require('./dropdown.less')
+require('./../../../styles/less/components/dropdown.less')
 
 export default class Dropdown extends React.Component {
 
   static defaultProps = {
     componentClassName: 'dropdown',
+    prefix            : '',
     activeMethod      : 'click',
     defaultVisible    : false,
     contentStyle      : {},
@@ -18,6 +19,7 @@ export default class Dropdown extends React.Component {
 
   static propTypes = {
     componentClassName: React.PropTypes.string,
+    prefix            : React.PropTypes.string,
     activeMethod      : React.PropTypes.oneOf(['click', 'hover']),
     defaultVisible    : React.PropTypes.bool,
     contentStyle      : React.PropTypes.object,
@@ -90,7 +92,9 @@ export default class Dropdown extends React.Component {
   onDocumentClick = (e) => {
     // 此处留有个关闭按钮的 hook:
     // 当点击的节点 class 中存在 "dropdown-close" 时, 关闭按钮
-    if (e.target.classList.contains("dropdown-close")) {
+    const targetClass = e.target.getAttribute('class')
+
+    if (targetClass && targetClass.indexOf("dropdown-close") !== -1) {
       this.setVisible(false)
       return
     }
