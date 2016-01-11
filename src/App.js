@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Dropdown from './components/Dropdown/Dropdown.jsx';
 import $ from 'jquery';
-import {addMaskLayer, removeMaskLayer} from './business/MaskUtil';
+//import {addMaskLayer, removeMaskLayer} from './business/MaskUtil';
 
-require('./App.less');
+// require('./App.less');
 
 let maskCounter = 0;
 
@@ -21,7 +21,7 @@ export default class App extends Component {
     } else {
       removeMaskLayer(targetLayer)
     }
-  }
+  };
 
   render() {
     const spaceStyle = {width: 50, display: "inline-block"}
@@ -56,12 +56,12 @@ export default class App extends Component {
 
 class DropdownChild extends Component {
 
-  state = {count: 0}
+  state = {count: 0};
 
   onClick = (e) => {
     console.log(this.state.count);
     this.setState({count: ++this.state.count})
-  }
+  };
 
   render() {
 

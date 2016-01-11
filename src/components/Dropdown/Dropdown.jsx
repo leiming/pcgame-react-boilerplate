@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import invariant from 'invariant'
 
-require('./../../../styles/less/components/dropdown.less')
+//require('./../../../styles/less/components/dropdown.less')
 
 export default class Dropdown extends React.Component {
 
@@ -15,7 +15,7 @@ export default class Dropdown extends React.Component {
     contentStyle      : {},
     toggleStyle       : {},
     onVisibleChange   : () => {}
-  }
+  };
 
   static propTypes = {
     componentClassName: React.PropTypes.string,
@@ -25,9 +25,9 @@ export default class Dropdown extends React.Component {
     contentStyle      : React.PropTypes.object,
     toggleStyle       : React.PropTypes.object,
     onVisibleChange   : React.PropTypes.func
-  }
+  };
 
-  state = {isOpen: this.props.defaultVisible}
+  state = {isOpen: this.props.defaultVisible};
 
   componentDidMount() {
     // defaultVisible = true 当初次加载时，触发 change 及事件绑定
@@ -44,7 +44,7 @@ export default class Dropdown extends React.Component {
     if (prevState.isOpen !== currentVisible) {
       this.props.onVisibleChange({visible: currentVisible})
     }
-  }
+  };
 
   getDropdownToggle = (child) => {
     const props = this.props
@@ -60,7 +60,7 @@ export default class Dropdown extends React.Component {
     }
 
     return (<span {...toggleProp} style={props.toggleStyle}>{child}</span>)
-  }
+  };
 
   getDropdownContent = (child) => {
     const props = this.props
@@ -74,20 +74,20 @@ export default class Dropdown extends React.Component {
     }
 
     return (<div {...contentProps} style={props.contentStyle}>{child}</div>)
-  }
+  };
 
   setVisible = (visibleState) => {
     const visible = !!visibleState
     this.setState({isOpen: visible})
-  }
+  };
 
   bindOuter = () => {
     $(document).on('click', this.onDocumentClick)
-  }
+  };
 
   unbindOuter = () => {
     $(document).off('click', this.onDocumentClick)
-  }
+  };
 
   onDocumentClick = (e) => {
     // 此处留有个关闭按钮的 hook:
@@ -104,7 +104,7 @@ export default class Dropdown extends React.Component {
     if (!isContain) {
       this.setVisible(false)
     }
-  }
+  };
 
   onClick = (e) => {
     const openState = !this.state.isOpen
@@ -118,15 +118,15 @@ export default class Dropdown extends React.Component {
     this.setVisible(openState)
     e.preventDefault()
     e.stopPropagation()
-  }
+  };
 
   onMouseEnter = (e) => {
     this.setVisible(true)
-  }
+  };
 
   onMouseLeave = (e) => {
     this.setVisible(false)
-  }
+  };
 
   render() {
     const props = this.props
