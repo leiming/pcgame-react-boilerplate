@@ -3,7 +3,7 @@ import Dropdown from './components/Dropdown/Dropdown.jsx';
 import $ from 'jquery';
 //import {addMaskLayer, removeMaskLayer} from './business/MaskUtil';
 
-// require('./App.less');
+require('./App.css');
 
 let maskCounter = 0;
 
