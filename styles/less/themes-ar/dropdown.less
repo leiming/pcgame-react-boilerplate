@@ -1,11 +1,16 @@
-@prefix: ~"ar-";
-@theme-dropdown: ~"@{prefix}dropdown";
-
-// Variables
-//
+@theme-dropdown: ~"@{global-prefix}dropdown";
 
 .@{theme-dropdown} {
   &-toggle {
-    //color: red;
+    //
+  }
+
+  &-content{
+    border: @global-border;
+    border-radius: @global-border-radius;
+    margin-top: 5px;
+    padding: @global-padding;
+    animation: opacity 1s ease-in-out;
+    -webkit-animation: fadeIn .2s ease-in-out;
   }
 }

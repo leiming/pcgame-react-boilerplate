@@ -1,0 +1,53 @@
+@button: ~"button";
+
+// https://github.com/uikit/uikit/blob/master/src/less/core/button.less
+
+.@{button} {
+  -webkit-appearance: none;
+  margin: 0;
+  border: none;
+  overflow: visible;
+  font: inherit;
+  color: #666;
+  text-transform: none;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0 12px;
+  background: #f7f7f7;
+  vertical-align: middle;
+  line-height: 28px;
+  min-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+
+  /*
+   * Hover
+   * 1. Apply hover style also to focus state
+   * 2. Remove default focus style
+   * 3. Required for `a` elements
+   */
+  &:hover, &:focus {
+    // 1
+    background-color: #f5f5f5;
+    color: #666;
+    // 2
+    outline: none;
+    // 3
+    text-decoration: none;
+  }
+
+  /* Active */
+  &:active, &-active {
+    background-color: #f5f5f5;
+    color: #666;
+  }
+
+ &:disabled, &-disabled {
+    cursor: default;
+    background-color: #f5f5f5;
+    color: #999;
+  }
+
+}
+

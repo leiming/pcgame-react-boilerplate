@@ -12,12 +12,12 @@ module.exports = {
     dropdown: [
       'eventsource-polyfill',
       'webpack-hot-middleware/client',
-      './examples/Dropdown/index'
+      './examples/dropdown/index'
     ],
     button: [
       'eventsource-polyfill',
       'webpack-hot-middleware/client',
-      './examples/Button/index'
+      './examples/button/index'
     ]
   },
   output: {
@@ -48,7 +48,7 @@ module.exports = {
 
       {
         test: /\.less$/,
-        loader: "style!css!less"
+        loader: "style!css!postcss-loader!less"
       },
 
       {
