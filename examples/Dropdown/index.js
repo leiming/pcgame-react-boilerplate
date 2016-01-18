@@ -14,7 +14,9 @@ export default class Sample extends React.Component {
   render() {
     return <div>
       <Dropdown activeMethod='click' defaultVisible={true} {...this.props} onVisibleChange={this.onVisibleChange}>
-        <span className="button ar-button">toggle</span>
+        <span className="button ar-button">toggle
+          <i className="ar-dropdown-ico"></i>
+        </span>
         <div className={'customContent'}>
           <span className="dropdown-close"></span>
           <ul>

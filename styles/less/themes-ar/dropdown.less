@@ -10,7 +10,23 @@
     border-radius: @global-border-radius;
     margin-top: 5px;
     padding: @global-padding;
-    animation: opacity 1s ease-in-out;
+    animation: fadeIn .2s ease-in-out;
     -webkit-animation: fadeIn .2s ease-in-out;
   }
+
+  &-ico {
+    .ar-ico();
+  }
+
+  &-ico:before {
+    content: "\f0d8";
+  }
+
+  &.@{dropdown}-hidden {
+    .@{theme-dropdown}-ico:before {
+      content: "\f0d7";
+    }
+  }
+
 }
+
