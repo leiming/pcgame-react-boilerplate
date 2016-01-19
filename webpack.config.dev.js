@@ -1,31 +1,34 @@
 var path = require('path');
 var webpack = require('webpack');
 
+// For example
+const componentList = ['dropdown', 'button', 'tooltip'];
+
+var compenentEntry = {
+  index: [
+    'eventsource-polyfill', // necessary for hot reloading with IE
+    'webpack-hot-middleware/client',
+    './src/index'
+  ]
+};
+
+componentList.map((value) => {
+  compenentEntry[value] = [
+    'eventsource-polyfill',
+    'webpack-hot-middleware/client',
+    './examples/' + value + '/index']
+})
+
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: {
-    index: [
-      'eventsource-polyfill', // necessary for hot reloading with IE
-      'webpack-hot-middleware/client',
-      './src/index'
-    ],
-    dropdown: [
-      'eventsource-polyfill',
-      'webpack-hot-middleware/client',
-      './examples/dropdown/index'
-    ],
-    button: [
-      'eventsource-polyfill',
-      'webpack-hot-middleware/client',
-      './examples/button/index'
-    ]
-  },
-  output: {
-    path: path.join(__dirname, 'build'),
-    filename: '[name].js',
+  devtool  : 'cheap-module-eval-source-map',
+  entry    : compenentEntry,
+  output   : {
+    path      : path.join(__dirname, 'build'),
+    filename  : '[name].js',
     publicPath: '/static/'
   },
-  plugins: [
+  plugins  : [
+    new webpack.DefinePlugin({__DEV__: true, __PRODUCTION__:false}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
@@ -34,30 +37,30 @@ module.exports = {
     //  on the global var jQuery
     "jquery": "jQuery"
   },
-  resolve: {
+  resolve  : {
     extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx"]
   },
-  module: {
+  module   : {
     loaders: [
       {
-        test: /\.(jsx|js)?/,
+        test   : /\.(jsx|js)?/,
         exclude: /node_modules/,
         loaders: ['babel'],
         include: [path.join(__dirname, 'src'), path.join(__dirname, 'examples')]
       },
 
       {
-        test: /\.less$/,
+        test  : /\.less$/,
         loader: "style!css!postcss-loader!less"
       },
 
       {
-        test: /\.css$/,
+        test  : /\.css$/,
         loader: "style-loader!css-loader!postcss-loader"
       }
     ]
   },
-  postcss: function (webpack) {
+  postcss  : function (webpack) {
     return [
       require("postcss-import")({addDependencyTo: webpack}),
       require("postcss-url")(),
