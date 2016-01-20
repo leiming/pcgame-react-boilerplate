@@ -12,7 +12,12 @@ export default class Sample extends React.Component {
 
   render() {
     return <div>
-      <Tooltip popover={<span>popover</span>}>good</Tooltip>
+      <Tooltip activeMethod="click" popover={<span>popover</span>}>
+        <button>
+          aaaa
+        </button>
+      </Tooltip>
+      <Tooltip popover={<span>popover2</span>}>good3</Tooltip>
     </div>
   }
 }

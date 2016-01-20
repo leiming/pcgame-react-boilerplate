@@ -1,11 +1,9 @@
-import React from 'react'
+import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import invariant from 'invariant'
 
-//require('./../../../styles/less/components/dropdown.less')
-
-export default class Dropdown extends React.Component {
+export default class Dropdown extends Component {
 
   static defaultProps = {
     componentClassName: 'dropdown',
@@ -18,13 +16,13 @@ export default class Dropdown extends React.Component {
   };
 
   static propTypes = {
-    componentClassName: React.PropTypes.string,
-    prefix            : React.PropTypes.string,
-    activeMethod      : React.PropTypes.oneOf(['click', 'hover']),
-    defaultVisible    : React.PropTypes.bool,
-    contentStyle      : React.PropTypes.object,
-    toggleStyle       : React.PropTypes.object,
-    onVisibleChange   : React.PropTypes.func
+    componentClassName: PropTypes.string,
+    prefix            : PropTypes.string,
+    activeMethod      : PropTypes.oneOf(['click', 'hover']),
+    defaultVisible    : PropTypes.bool,
+    contentStyle      : PropTypes.object,
+    toggleStyle       : PropTypes.object,
+    onVisibleChange   : PropTypes.func
   };
 
   state = {isOpen: this.props.defaultVisible};
@@ -82,11 +80,11 @@ export default class Dropdown extends React.Component {
   };
 
   bindOuter = () => {
-    $(document).on('click', this.onDocumentClick)
+    document.addEventListener('click', this.onDocumentClick)
   };
 
   unbindOuter = () => {
-    $(document).off('click', this.onDocumentClick)
+    document.removeEventListener('click', this.onDocumentClick)
   };
 
   onDocumentClick = (e) => {

@@ -1,8 +1,39 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {findDOMNode, render} from 'react-dom'
 import invariant from 'invariant'
+import classnames from 'classnames'
+
+import {eventListenerPolyfill} from '../utils/eventListenerIEPolyfill'
 
 export default class Tooltip extends Component {
+
+  static defaultProps = {
+    componentClassName: 'tooltip',
+    perfix            : '',
+    defaultVisible    : false,
+    activeMethod      : 'hover',
+    onVisibleChange   : ()=> {}
+  };
+
+  static propTypes = {
+    componentClassName: PropTypes.string.isRequired,
+    perfix            : PropTypes.string,
+    defaultVisible    : PropTypes.bool,
+    activeMethod      : PropTypes.oneOf(['click', 'hover', 'focus']),
+    onVisibleChange   : PropTypes.func
+  };
+
+  state = {
+    isVisible: this.props.defaultVisible
+  };
+
+  setVisiable = (visible) => {
+    this.setState({isVisible: !!visible})
+  };
+
+  onClick = () => {
+    this.setVisiable(!this.state.isVisible)
+  };
 
   getTipContainer(container) {
 
@@ -22,30 +53,32 @@ export default class Tooltip extends Component {
 
   }
 
-  componentDidMount(){
+  componentDidMount() {
 
-    const tipContainer = this.getTipContainer();
+  }
 
-    console.log(tipContainer)
+  componentDidUpdate() {
 
-    render(this.popover, tipContainer)
-
-//    if (this.popover) {
-//      tipContainer.appendChild(this.popover)
-//    }
-
+    const {componentClassName} = this.props;
+    const popoverClassName = classnames({[`${componentClassName}-pop-hidden`]: this.state.isVisible})
+    console.log(popoverClassName)
+    const popover = React.cloneElement(this.props.popover, {className: popoverClassName})
+    render(popover, this.getTipContainer())
   }
 
   render() {
 
-    const {popover, ...props} = this.props;
+    const {activeMethod, ...props} = this.props;
 
+    if (activeMethod.indexOf('click') !== -1) {
+      props.onClick = this.onClick;
+    }
     // todo: poppver is string
 
-    this.popover = popover
+    return <span {...props}>{this.props.children}</span>
 
-
-    return <span>{this.props.children}</span>
   }
 
 }
+
+
