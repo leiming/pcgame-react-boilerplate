@@ -31,10 +31,6 @@ export default class Tooltip extends Component {
     this.setState({isVisible: !!visible})
   };
 
-  onClick = () => {
-    this.setVisiable(!this.state.isVisible)
-  };
-
   getTipContainer(container) {
 
     if (this.tipContainer) {
@@ -53,15 +49,10 @@ export default class Tooltip extends Component {
 
   }
 
-  componentDidMount() {
-
-  }
 
   componentDidUpdate() {
-
     const {componentClassName} = this.props;
-    const popoverClassName = classnames({[`${componentClassName}-pop-hidden`]: this.state.isVisible})
-    console.log(popoverClassName)
+    const popoverClassName = classnames({[`${componentClassName}-pop-hidden`]: !this.state.isVisible})
     const popover = React.cloneElement(this.props.popover, {className: popoverClassName})
     render(popover, this.getTipContainer())
   }
@@ -71,9 +62,20 @@ export default class Tooltip extends Component {
     const {activeMethod, ...props} = this.props;
 
     if (activeMethod.indexOf('click') !== -1) {
-      props.onClick = this.onClick;
+      props.onClick = this.setVisiable.bind(this, !this.state.isVisible);
     }
-    // todo: poppver is string
+
+    if (activeMethod.indexOf('hover') !== -1) {
+      props.onMouseEnter = this.setVisiable.bind(this, true)
+      props.onMouseLeave = this.setVisiable.bind(this, false)
+    }
+
+    if (activeMethod.indexOf('focus') !== -1) {
+      props.onFocus = this.setVisiable.bind(this, true)
+      props.onBlur = this.setVisiable.bind(this, false)
+    }
+
+    // todo: popover is string
 
     return <span {...props}>{this.props.children}</span>
 

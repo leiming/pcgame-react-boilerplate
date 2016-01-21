@@ -10,14 +10,15 @@ export default class Sample extends React.Component {
     prefix: 'ar-'
   };
 
+
   render() {
+
     return <div>
-      <Tooltip activeMethod="click" popover={<span>popover</span>}>
-        <button>
-          aaaa
-        </button>
+      <Tooltip popover={<span>popover4</span>} activeMethod="focus">
+        <span>
+          <input type="text"/>
+        </span>
       </Tooltip>
-      <Tooltip popover={<span>popover2</span>}>good3</Tooltip>
     </div>
   }
 }
