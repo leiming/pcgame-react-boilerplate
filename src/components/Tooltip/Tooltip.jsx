@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {findDOMNode, render} from 'react-dom'
 import invariant from 'invariant'
 import classnames from 'classnames'
+import Popover from '../Popover/Popover'
 
 import {eventListenerPolyfill} from '../utils/eventListenerIEPolyfill'
 
@@ -48,7 +49,6 @@ export default class Tooltip extends Component {
     return this.tipContainer = findDOMNode(tipContainer)
 
   }
-
 
   componentDidUpdate() {
     const {componentClassName} = this.props;

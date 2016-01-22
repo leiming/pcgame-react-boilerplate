@@ -13,7 +13,7 @@ export default class Sample extends React.Component {
 
   render() {
 
-    return <div>
+    return <div className="container">
       <Tooltip popover={<span>popover4</span>} activeMethod="focus">
         <span>
           <input type="text"/>
