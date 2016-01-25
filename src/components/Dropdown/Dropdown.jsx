@@ -49,8 +49,8 @@ export default class Dropdown extends Component {
     const prefix = props.prefix || ''
 
     const toggleProp = {
-      'className': classNames(`${props.componentClassName}-toggle`,
-        {[`${prefix}${props.componentClassName}-toggle`]: prefix})
+      'className': classNames(`${props.componentName}-toggle`,
+        {[`${prefix}${props.componentName}-toggle`]: prefix})
     }
 
     if (props.activeMethod.indexOf('click') !== -1) {
@@ -66,8 +66,8 @@ export default class Dropdown extends Component {
 
     const contentProps = {
       className: classNames(
-        `${props.componentClassName}-content`,
-        {[`${prefix}${props.componentClassName}-content`]: prefix}
+        `${props.componentName}-content`,
+        {[`${prefix}${props.componentName}-content`]: prefix}
       )
     }
 
@@ -147,9 +147,9 @@ export default class Dropdown extends Component {
       {...containerProp}
       className={classNames(
         {[`${props.className}`]: props.className},
-        `${props.componentClassName}`,
-        {[`${prefix}${props.componentClassName}`]: prefix},
-        {[`${props.componentClassName}-hidden`]: !this.state.isOpen})
+        `${props.componentName}`,
+        {[`${prefix}${props.componentName}`]: prefix},
+        {[`${props.componentName}-hidden`]: !this.state.isOpen})
       }>
       {this.getDropdownToggle(children[0])}
       {this.getDropdownContent(children[1])}

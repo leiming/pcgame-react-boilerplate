@@ -7,8 +7,15 @@ export function getClassNames(prefix, ...classNames) {
   invariant(classNamesType === '[object Array]'
     || classNamesType === '[object String]', 'The type classNames must be string or array')
 
-  for (let value of classNames) {
-    console.log(value)
+  if (!prefix) {
+    return classnames(classNames)
   }
 
+  const addPrefixClassNames = []
+
+  for (let value of classNames) {
+    addPrefixClassNames.push(prefix + value)
+  }
+
+  return classnames(classNames, addPrefixClassNames)
 }

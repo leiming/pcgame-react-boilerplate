@@ -28,7 +28,7 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins  : [
-    new webpack.DefinePlugin({__DEV__: true, __PRODUCTION__:false}),
+    new webpack.DefinePlugin({__DEV__: true, __PRODUCTION__: false}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
@@ -64,7 +64,7 @@ module.exports = {
     return [
       require("postcss-import")({addDependencyTo: webpack}),
       require("postcss-url")(),
-      require("postcss-cssnext")(),
+      require("postcss-cssnext")({browsers: ["last 2 versions", "ie >= 8" , "> 1%"]}),
       // and if you want to compress,
       // just use css-loader option that already use cssnano under the hood
       require("postcss-browser-reporter")(),

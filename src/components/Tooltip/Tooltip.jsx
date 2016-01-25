@@ -50,7 +50,17 @@ export default class Tooltip extends Component {
 
   }
 
+  getPosition(){
+    console.log(this.getTipContainer().tagName)
+
+    // https://github.com/amazeui/amazeui-react/blob/master/src/utils/domUtils.js
+  }
+
   componentDidUpdate() {
+
+    this.getPosition();
+
+
     const {componentClassName} = this.props;
     const popoverClassName = classnames({[`${componentClassName}-pop-hidden`]: !this.state.isVisible})
     const popover = React.cloneElement(this.props.popover, {className: popoverClassName})

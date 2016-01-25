@@ -1,29 +1,38 @@
 import React, {Component, PropTypes} from 'react'
 
 import {getClassNames} from '../utils/classUtils'
+import classnames from 'classnames'
 
 export default class Popover extends Component {
 
   static defaultProps = {
-    componentClassName: 'popover',
-    prefix            : '',
-    direction         : 'top'
+    componentName: 'popover',
+    prefix       : '',
+    direction    : 'top'
   };
 
   static propTypes = {
-    componentClassName: PropTypes.string.isRequired,
-    prefix            : PropTypes.string,
-    direction         : PropTypes.oneOf(['left', 'right', 'top', 'bottom'])
+    componentName: PropTypes.string.isRequired,
+    prefix       : PropTypes.string,
+    direction    : PropTypes.oneOf(['left', 'right', 'top', 'bottom'])
   };
 
   render() {
-//    return <div className=>
-//
-//    </div>
+
+    const {style, className, ...props} = this.props
+
+    return <span
+      style={style}
+      className={classnames(className, getClassNames(
+    props.prefix,
+    props.componentName + '-' + props.direction))
+
+     }>
+      <span className={getClassNames(props.prefix, props.componentName  + '-content')}>
+        {this.props.children}
+      </span>
+      <span className={getClassNames(props.prefix, props.componentName + '-caret')}> </span>
+    </span>
   }
 }
 
-// todo: temp
-
-getClassNames('prefix', 'a')
-getClassNames('prefix', 'b' , 'c')

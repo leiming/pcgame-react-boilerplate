@@ -22,10 +22,10 @@ export default class Button extends Component {
     const {className, prefix, disabled, style, ...props} = this.props
     const classNames = classnames(
       {
-        [`${prefix}${props.componentClassName}`]: prefix,
-        [`${props.componentClassName}-disable`] : disabled
+        [`${prefix}${props.componentName}`]: prefix,
+        [`${props.componentName}-disable`] : disabled
       },
-      props.componentClassName, className)
+      props.componentName, className)
 
     // 当 Button 中放入复核组件时,只设置 properties 是无法阻止内部元素的响应事件的
     // 若采用屏蔽 children 内部的事件响应(例如onClick),则需递归检测每一级子孙元素上的事件,子子孙孙无穷匮也

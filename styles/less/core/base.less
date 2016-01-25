@@ -20,15 +20,18 @@ html, body, dl, dt, dd, ul, ol, li, th, td, p, blockquote, pre, form, fieldset, 
   margin-bottom: 10px
 }
 
+body, button, input, select, textarea {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: "liga", "kern"
+}
+
 * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 :after, :before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
