@@ -3,6 +3,7 @@ import {findDOMNode, render} from 'react-dom'
 import invariant from 'invariant'
 import classnames from 'classnames'
 import Popover from '../Popover/Popover'
+import {contains} from '../utils/domUtils'
 
 import {eventListenerPolyfill} from '../utils/eventListenerIEPolyfill'
 
@@ -51,6 +52,7 @@ export default class Tooltip extends Component {
   }
 
   getPosition(){
+
     console.log(this.getTipContainer().tagName)
 
     // https://github.com/amazeui/amazeui-react/blob/master/src/utils/domUtils.js
@@ -58,7 +60,7 @@ export default class Tooltip extends Component {
 
   componentDidUpdate() {
 
-    this.getPosition();
+    this.getPosition()
 
 
     const {componentClassName} = this.props;
