@@ -1,35 +1,39 @@
 import React, {Component, PropTypes} from 'react'
 import {findDOMNode, render} from 'react-dom'
 import invariant from 'invariant'
-import classnames from 'classnames'
 import Popover from '../Popover/Popover'
-import {contains} from '../utils/domUtils'
+import classnames from 'classnames'
+import {getClassNames} from '../utils/classUtils'
+import {getStyles, getOffset} from '../utils/domUtils'
 
 import {eventListenerPolyfill} from '../utils/eventListenerIEPolyfill'
 
 export default class Tooltip extends Component {
 
   static defaultProps = {
-    componentClassName: 'tooltip',
-    perfix            : '',
-    defaultVisible    : false,
-    activeMethod      : 'hover',
-    onVisibleChange   : ()=> {}
+    componentName  : 'tooltip',
+    perfix         : '',
+    defaultVisible : false,
+    activeMethod   : 'hover',
+    direction      : 'top',
+    onVisibleChange: ()=> {}
   };
 
   static propTypes = {
-    componentClassName: PropTypes.string.isRequired,
-    perfix            : PropTypes.string,
-    defaultVisible    : PropTypes.bool,
-    activeMethod      : PropTypes.oneOf(['click', 'hover', 'focus']),
-    onVisibleChange   : PropTypes.func
+    componentName  : PropTypes.string.isRequired,
+    perfix         : PropTypes.string,
+    defaultVisible : PropTypes.bool,
+    activeMethod   : PropTypes.oneOf(['click', 'hover', 'focus']),
+    direction      : PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    onVisibleChange: PropTypes.func
   };
 
   state = {
-    isVisible: this.props.defaultVisible
+    isPopoverRendered: false,
+    isVisible        : this.props.defaultVisible
   };
 
-  setVisiable = (visible) => {
+  setVisible = (visible) => {
     this.setState({isVisible: !!visible})
   };
 
@@ -51,43 +55,79 @@ export default class Tooltip extends Component {
 
   }
 
-  getPosition(){
+  getPopoverOffset() {
+    const direction = this.props.direction
+    const tooltipOffset = getOffset(findDOMNode(this))
+    const popoverOffset = this.state.isPopoverRendered ? getOffset(this.popoverDOM) : {}
 
-    console.log(this.getTipContainer().tagName)
+    const popoverCaretWidth = 8
 
-    // https://github.com/amazeui/amazeui-react/blob/master/src/utils/domUtils.js
+    const popoverHeight = popoverOffset.height || 0
+    const popoverWidth = popoverOffset.width || 0
+
+    switch (direction) {
+      case 'top':
+        return {
+          top : tooltipOffset.top - (popoverHeight + popoverCaretWidth),
+          left: tooltipOffset.left - ((popoverWidth - tooltipOffset.width) / 2)
+        }
+      case 'left':
+        return {
+          top : tooltipOffset.top - ((popoverHeight - tooltipOffset.height) / 2),
+          left: tooltipOffset.left - (popoverWidth + popoverCaretWidth)
+        }
+      case 'right':
+        return {
+          top : tooltipOffset.top - ((popoverHeight - tooltipOffset.height) / 2),
+          left: tooltipOffset.left + (tooltipOffset.width + popoverCaretWidth)
+        }
+      case 'bottom':
+        return {
+          top : tooltipOffset.top + popoverHeight - (popoverCaretWidth / 2),
+          left: tooltipOffset.left - ((popoverWidth - tooltipOffset.width) / 2)
+        }
+    }
+
   }
 
   componentDidUpdate() {
+    const style = Object.assign({position: 'absolute'}, this.getPopoverOffset())
+    const self = this
+    const {componentName} = this.props
+    const popoverClassName = classnames({[`${componentName}-pop-hidden`]: !this.state.isVisible})
+    const popover = React.cloneElement(this.props.popover, {className: popoverClassName, style})
+    render(popover, this.getTipContainer(), function () {
 
-    this.getPosition()
+      if (!self.state.isPopoverRendered) {
+        self.popoverDOM = findDOMNode(this)
+        // Todo: https://github.com/facebook/react/issues/3417
+        self.setState({isPopoverRendered: true})
+      }
 
-
-    const {componentClassName} = this.props;
-    const popoverClassName = classnames({[`${componentClassName}-pop-hidden`]: !this.state.isVisible})
-    const popover = React.cloneElement(this.props.popover, {className: popoverClassName})
-    render(popover, this.getTipContainer())
+    })
   }
 
   render() {
 
-    const {activeMethod, ...props} = this.props;
+    const {activeMethod, ...props, className} = this.props;
 
     if (activeMethod.indexOf('click') !== -1) {
-      props.onClick = this.setVisiable.bind(this, !this.state.isVisible);
+      props.onClick = this.setVisible.bind(this, !this.state.isVisible);
     }
 
     if (activeMethod.indexOf('hover') !== -1) {
-      props.onMouseEnter = this.setVisiable.bind(this, true)
-      props.onMouseLeave = this.setVisiable.bind(this, false)
+      props.onMouseEnter = this.setVisible.bind(this, true)
+      props.onMouseLeave = this.setVisible.bind(this, false)
     }
 
     if (activeMethod.indexOf('focus') !== -1) {
-      props.onFocus = this.setVisiable.bind(this, true)
-      props.onBlur = this.setVisiable.bind(this, false)
+      props.onFocus = this.setVisible.bind(this, true)
+      props.onBlur = this.setVisible.bind(this, false)
     }
 
-    // todo: popover is string
+    // Todo: popover is string
+
+    props.className = classnames(className, getClassNames(props.prefix, props.componentName))
 
     return <span {...props}>{this.props.children}</span>
 

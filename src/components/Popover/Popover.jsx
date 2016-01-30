@@ -19,9 +19,9 @@ export default class Popover extends Component {
 
   render() {
 
-    const {style, className, ...props} = this.props
+    const {id, style, className, ...props} = this.props
 
-    return <span
+    return <div id={id}
       style={style}
       className={classnames(className, getClassNames(
     props.prefix,
@@ -32,7 +32,7 @@ export default class Popover extends Component {
         {this.props.children}
       </span>
       <span className={getClassNames(props.prefix, props.componentName + '-caret')}> </span>
-    </span>
+    </div>
   }
 }
 

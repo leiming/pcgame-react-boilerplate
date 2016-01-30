@@ -1,11 +1,15 @@
 @tooltip: tooltip;
 
+.@{tooltip} {
+  display: inline-block;
+}
+
 .@{tooltip}-pop {
   position: absolute;
   display: block;
 
   &-hidden {
-    display: none;
+    visibility: hidden;
   }
 
 }
