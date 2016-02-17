@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {findDOMNode, render} from 'react-dom'
+import {findDOMNode, render, unmountComponentAtNode} from 'react-dom'
 import invariant from 'invariant'
 import Popover from '../Popover/Popover'
 import classnames from 'classnames'
@@ -105,6 +105,12 @@ export default class Tooltip extends Component {
       }
 
     })
+  }
+
+  componentWillUnmount() {
+    if (this.tipContainer) {
+      unmountComponentAtNode(findDOMNode(this.tipContainer))
+    }
   }
 
   render() {
