@@ -28,7 +28,19 @@ export function getOffset(element) {
   // If we don't have gBCR, just use 0,0 rather than error
   // BlackBerry 5, iOS 3 (original iPhone)
   if (typeof element.getBoundingClientRect !== "undefined") {
+
+    // BUG: At least on chrome, getBoundingClientRect returns (w:0,h:0,l:0,t:0)
+    // @see http://stackoverflow.com/questions/28308010/getboundingclientrect-to-detect-visibility
+    const elementStyle = getStyles(element)
+    if (elementStyle.display === 'none') {
+      // HACK: set display
+      element.style.display = 'block'
+    }
+
     domRect = element.getBoundingClientRect()
+
+    // fix the HACK
+    element.style.display = ''
   }
 
   // https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect

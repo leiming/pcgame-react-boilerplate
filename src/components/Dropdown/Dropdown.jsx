@@ -6,23 +6,23 @@ import invariant from 'invariant'
 export default class Dropdown extends Component {
 
   static defaultProps = {
-    componentClassName: 'dropdown',
-    prefix            : '',
-    activeMethod      : 'click',
-    defaultVisible    : false,
-    contentStyle      : {},
-    toggleStyle       : {},
-    onVisibleChange   : () => {}
+    componentName  : 'dropdown',
+    prefix         : '',
+    activeMethod   : 'click',
+    defaultVisible : false,
+    contentStyle   : {},
+    toggleStyle    : {},
+    onVisibleChange: () => {}
   };
 
   static propTypes = {
-    componentClassName: PropTypes.string,
-    prefix            : PropTypes.string,
-    activeMethod      : PropTypes.oneOf(['click', 'hover']),
-    defaultVisible    : PropTypes.bool,
-    contentStyle      : PropTypes.object,
-    toggleStyle       : PropTypes.object,
-    onVisibleChange   : PropTypes.func
+    componentName  : PropTypes.string,
+    prefix         : PropTypes.string,
+    activeMethod   : PropTypes.oneOf(['click', 'hover']),
+    defaultVisible : PropTypes.bool,
+    contentStyle   : PropTypes.object,
+    toggleStyle    : PropTypes.object,
+    onVisibleChange: PropTypes.func
   };
 
   state = {isOpen: this.props.defaultVisible};

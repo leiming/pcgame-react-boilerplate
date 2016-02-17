@@ -18,7 +18,6 @@ export default class Popover extends Component {
   };
 
   render() {
-
     const {id, style, className, ...props} = this.props
 
     return <div id={id}
